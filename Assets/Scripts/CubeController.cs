@@ -2,15 +2,16 @@ using UnityEngine;
 
 public class CubeController : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
+    private void OnCollisionEnter(Collision collision)
     {
-        
+        if (collision.gameObject.tag == "greenBullet" && this.gameObject.tag == "Green")
+        {
+            //destroy
+        }
+        else if (collision.gameObject.tag == "redBullet" && this.gameObject.tag == "Red")
+        {
+            //destroy me
+        }
     }
 }

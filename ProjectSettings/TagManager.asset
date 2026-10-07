@@ -4,8 +4,11 @@
 TagManager:
   serializedVersion: 3
   tags:
-  - Good
-  - Bad
+  - Green
+  - Red
+  - Wall
+  - greenBullet
+  - redBullet
   layers:
   - Default
   - TransparentFX

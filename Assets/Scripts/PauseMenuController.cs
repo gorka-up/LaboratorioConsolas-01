@@ -1,10 +1,16 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class PauseMenuController : MonoBehaviour
 {
-    [Header("Pause Menu")]
+    [Header("Pause Menu Canvas")]
     [SerializeField] private GameObject pauseMenu;
+
+    [Header("Buttons")]
+    [SerializeField] private Button continueButton;
+    [SerializeField] private Button mainMenuButton;
 
     private bool isPaused = false;
 
@@ -14,27 +20,31 @@ public class PauseMenuController : MonoBehaviour
         isPaused = false;
     }
 
-    void Continue()
+    public void Continue()
     {
         if (isPaused)
         {
             pauseMenu.SetActive(false);
             isPaused = false;
+            //Unpause game
+            EventSystem.current.SetSelectedGameObject(null);
         }
     }
 
-    void GoMainMenu()
+    public void GoMainMenu()
     {
         SceneManager.LoadScene("MainMenu");
         isPaused = false;
     }
 
-    void Pause()
+    public void Pause()
     {
         if (!isPaused)
         {
             pauseMenu.SetActive(true);
             isPaused = true;
+            //PauseGame
+            continueButton.Select();
         }
     }
 }

@@ -13,9 +13,10 @@ GameObject:
   - component: {fileID: 5628444986029849356}
   - component: {fileID: 8607587832048008860}
   - component: {fileID: 1104583167572245665}
+  - component: {fileID: 4384840659999762913}
   m_Layer: 0
-  m_Name: Good
-  m_TagString: Good
+  m_Name: GreenEnemy
+  m_TagString: Green
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -140,3 +141,15 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &4384840659999762913
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4907660214963193375}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2435bffe5e661ae47aa00ce04c606e60, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CubeController
