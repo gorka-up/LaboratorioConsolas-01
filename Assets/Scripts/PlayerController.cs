@@ -12,6 +12,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Material greenMat;
     [SerializeField] private Material redMat;
 
+    [SerializeField] private PauseMenuController pauseController;
+
+
     enum State
     {
         Red , Green
@@ -19,49 +22,64 @@ public class PlayerController : MonoBehaviour
 
     private State selfState = State.Green;
 
-    private InputAction move;
-    private InputAction look;
-    private InputAction attack;
-    private InputAction interact;
+    private Vector2 move;
+    private Vector2 look;
 
     void Start()
     {
-        move = InputSystem.actions.FindAction("Move");
-        look = InputSystem.actions.FindAction("Look");
-        attack = InputSystem.actions.FindAction("Attack");
-        interact = InputSystem.actions.FindAction("Interact");
-
         selfState = State.Green;
     }
 
     void Update()
     {
-        Vector2 moveValue = move.ReadValue<Vector2>();
-        Move(moveValue);
-
-        Vector2 lookValue = look.ReadValue<Vector2>();
-        Look(lookValue);
-
-
-        if (attack.IsPressed())
+        InputSystem.onDeviceChange += (device, change) =>
         {
-            Attack();
-        }
+            switch (change)
+            {
+                case InputDeviceChange.Added:
+                    Debug.Log("Device conected in game");
+                    pauseController.Continue();
+                    break;
 
-        if (interact.IsPressed())
-        {
-            Change();
-        }
+                case InputDeviceChange.Removed:
+                    Debug.Log("Device disconected in game");
+                    pauseController.Pause();
+                    break;
+            }
+        };
     }
 
+    public void OnMove(InputAction.CallbackContext context)
+    {
+       //move character
+    }
+    public void OnLook(InputAction.CallbackContext context)
+    {
+        //move character
+    }
+
+    public void OnInteract(InputAction.CallbackContext context)
+    {
+        Change();
+    }
+
+    public void OnAttack(InputAction.CallbackContext context)
+    {
+        Attack();
+    }
+
+    public void OnPause(InputAction.CallbackContext context)
+    {
+        pauseController.Pause();
+    }
     private void Move(Vector2 movement)
     {
-
+        //move
     }
 
     private void Look(Vector2 lookTo)
     {
-
+        //look
     }
 
     private void Attack()

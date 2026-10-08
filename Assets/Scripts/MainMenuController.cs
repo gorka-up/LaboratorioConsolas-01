@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -7,9 +8,27 @@ public class MainMenuController : MonoBehaviour
 {
     [Header("MainMenu Buttons")]
     [SerializeField] private Button playButton;
-    [SerializeField] private Button pipeButton;
     [SerializeField] private Button exitButton;
 
+
+    private void Update()
+    {
+        InputSystem.onDeviceChange += (device, change) =>
+        {
+            switch (change)
+            {
+                case InputDeviceChange.Added:
+                    Debug.Log("Device conected in Main menu");
+                    playButton.Select();
+                    break;
+
+                case InputDeviceChange.Removed:
+                    Debug.Log("Device disconected in Main menu");
+                    EventSystem.current.SetSelectedGameObject(null);
+                    break;
+            }
+        };
+    }
 
     void Start()
     {
@@ -27,8 +46,15 @@ public class MainMenuController : MonoBehaviour
         Application.Quit();
     }
 
-    public void Pipe()
+    private void OnApplicationFocus(bool focus)
     {
-        //make sound
+        if (focus)
+        {
+            playButton.Select();
+        }
+        else
+        {
+            EventSystem.current.SetSelectedGameObject(null);
+        }
     }
 }
